@@ -1,0 +1,86 @@
+version: '3.4'
+
+services:
+  patientdb:
+    image: mysql:latest
+    volumes:
+      - "$PWD/patient-api/devsetup/.mysql-data/db:/var/lib/mysql"
+    networks: 
+      - app
+    restart: on-failure
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: patient
+      MYSQL_USER: patient
+      MYSQL_PASSWORD: password
+
+  notesdb:
+    image: mongo:latest
+    networks: 
+      - app
+    container_name: notesdb
+    ports:
+      - 27017:27017
+
+  patientapi:
+    build:
+      context: ./patient-api
+    networks: 
+      - app
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://patientdb:3306/patient?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    depends_on:
+      - patientdb
+
+  notesapi:
+    build:
+      context: ./notes-api
+    networks: 
+      - app
+    ports:
+      - "8082:8082"
+    environment:
+      - MONGO_URL=notesdb://0.0.0.0:27017/notes_db
+    depends_on:
+      - notesdb
+
+  riskapi:
+    build:
+      context: ./risk-api
+    networks: 
+      - app
+    ports:
+      - "8083:8083"
+    depends_on:
+      - patientapi
+      - notesapi
+
+  gatewayapi:
+    build:
+      context: ./gateway-api
+    networks: 
+      - app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - riskapi   
+
+  webapp:
+    build:
+      context: ./webapp/angularclient
+    networks: 
+      - app      
+    ports:
+      - "8084:80"
+    depends_on:
+      - gatewayapi  
+
+networks:
+  app:
+    driver: bridge
+  
+
