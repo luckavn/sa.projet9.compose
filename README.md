@@ -1,4 +1,4 @@
-# Fymr App - Global
+# Fymr App - Composse
 
 Fymr is a medical app that allows professionals to : 
 - Create, edit or delete :
@@ -14,24 +14,19 @@ This app concerns all 5 micro-services.
 - Maven 3.5.X (or +)
 - Docker Desktop
 - MySQL
-- MongoDB
+- MongoDB 
+- NodeJS
 - npm + Angular Cli
 
-## Run apps (Local)
+## Run apps (Docker)
 
 ```
-- Follow README instructions in each project, you will proceed : 
-    - Launch Docker databases for local
-    - Launch each Spring context
-    - Launch angular local server for front-end service
-    - Enjoy!
-
-```
-
-## Run app (Docker)
-
-```
-- Orchestration DOCKER pour lancer tous les projets dans l'ordre ???
+- Git clone all projects (see above)
+- Verify docker-compose file in docker-compose project and adapt links for projects
+- Launch Docker 
+- For Windows users only : modify your hosts file and expose services name with your localhost
+- Open command terminal at root of compose
+- Launch "docker-compose up"
 
 ```
 
@@ -39,4 +34,9 @@ This app concerns all 5 micro-services.
 Github repo is public, you can fork it and make improvements.
 Please make sure to update tests as appropriate.
 
-https://github.com/luckavn/s
+https://github.com/luckavn/sa.projet9.patientapi
+https://github.com/luckavn/sa.projet9.notesapi
+https://github.com/luckavn/sa.projet9.riskapi
+https://github.com/luckavn/sa.projet9.gatewayapi
+https://github.com/luckavn/sa.projet9.angularclient
+https://github.com/luckavn/sa.projet9.compose

@@ -3,18 +3,18 @@ version: '3.4'
 services:
   patientdb:
     image: mysql:latest
-    volumes:
-      - "$PWD/patient-api/devsetup/.mysql-data/db:/var/lib/mysql"
+    # volumes:
+    #   - "$PWD/patient-api/devsetup/.mysql-data/db:/var/lib/mysql"
     networks: 
       - app
-    restart: on-failure
+    restart: always
     ports:
-      - 3306:3306
+      - 3306:3306 
     environment:
-      MYSQL_ROOT_PASSWORD: rootpw
-      MYSQL_DATABASE: patient
-      MYSQL_USER: patient
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: 'rootpw'
+      MYSQL_DATABASE: 'patient_db'
+      MYSQL_USER: 'mysql'
+      MYSQL_PASSWORD: 'rootpw'     
 
   notesdb:
     image: mongo:latest
@@ -31,8 +31,6 @@ services:
       - app
     ports:
       - "8081:8081"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://patientdb:3306/patient?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     depends_on:
       - patientdb
 
