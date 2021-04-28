@@ -26,8 +26,10 @@ This app concerns all 5 micro-services.
 - Launch Docker 
 - For Windows users only : modify your hosts file and expose services name with your localhost
 - Open command terminal at root of compose
+- Go to angularclient project and run "ng build --prod" in order to generate sources
 - Launch "docker-compose up"
 - Use gatewayapi at "/" in order to add datas to application through Swagger
+- Go to "https://localhost:8084/" and enjoy!
 
 ```
 
