@@ -27,6 +27,7 @@ This app concerns all 5 micro-services.
 - For Windows users only : modify your hosts file and expose services name with your localhost
 - Open command terminal at root of compose
 - Launch "docker-compose up"
+- Use gatewayapi at "/" in order to add datas to application through Swagger
 
 ```
 
